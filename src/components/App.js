@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
+import { connect } from "react-redux";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, Container } from "@material-ui/core";
 import CountriesList from "./CountriesList";
 import Header from "./Header";
+import SearchBar from "./SearchBar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,34 +14,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const App = () => {
+const App = ({ isDarkMode }) => {
   const classes = useStyles();
-  const [darkMode, setDarkMode] = useState(false);
 
   const theme = createMuiTheme({
     palette: {
-      type: darkMode ? "dark" : "light",
+      type: isDarkMode ? "dark" : "light",
+      primary: {
+        main: isDarkMode ? "hsl(0, 0%, 100%)" : "hsl(200, 15%, 8%)",
+      },
       background: {
-        paper: darkMode ? "hsl(207, 26%, 17%)" : "hsl(0, 0%, 98%)",
+        paper: isDarkMode ? "hsl(207, 26%, 17%)" : " hsl(0, 0%, 98%)",
       },
     },
   });
 
-  const handleChange = () => {
-    setDarkMode(!darkMode);
-  };
-
   return (
     <ThemeProvider theme={theme}>
       <Paper elevation={0} className={classes.root} square>
-        <Header handleChange={handleChange} darkMode={darkMode} />
+        <Header />
+        <SearchBar />
 
-        <Container>
-          <CountriesList darkMode={darkMode} />
-        </Container>
+        <CountriesList />
       </Paper>
     </ThemeProvider>
   );
 };
 
-export default App;
+const mapStateToProps = (state) => {
+  return { isDarkMode: state.isDarkMode };
+};
+
+export default connect(mapStateToProps)(App);

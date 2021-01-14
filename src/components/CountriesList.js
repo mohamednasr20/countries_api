@@ -3,8 +3,17 @@ import Grid from "@material-ui/core/Grid";
 import { connect } from "react-redux";
 import { fetchCountries } from "../actions";
 import CountryCard from "./CountryCard";
+import { Container } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
-const CountriesList = ({ countries, fetchCountries, darkMode }) => {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    textAlign: "center",
+  },
+}));
+
+const CountriesList = ({ countries, fetchCountries, isDarkMode }) => {
+  const classes = useStyles();
   useEffect(() => {
     fetchCountries();
   }, []);
@@ -21,20 +30,28 @@ const CountriesList = ({ countries, fetchCountries, darkMode }) => {
             population={country.population}
             region={country.region}
             capital={country.capital}
-            darkMode={darkMode}
+            darkMode={isDarkMode}
           />
         );
       });
 
   return (
-    <Grid container spacing={3}>
-      {countriesList}
-    </Grid>
+    <Container>
+      <Grid
+        className={classes.root}
+        container
+        spacing={3}
+        justify="center"
+        alignContent="center"
+      >
+        {countriesList}
+      </Grid>
+    </Container>
   );
 };
 
 const mapStateToProps = (state) => {
-  return { countries: state.countries };
+  return { countries: state.countries, isDarkMode: state.isDarkMode };
 };
 
 export default connect(mapStateToProps, { fetchCountries })(CountriesList);

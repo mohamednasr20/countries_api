@@ -9,7 +9,12 @@ import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles({
   root: {
+    textAlign: "center",
+  },
+  card: {
     maxWidth: 220,
+    height: 280,
+    margin: "auto",
     background: (props) =>
       props.darkMode ? "hsl(209, 23%, 22%)" : "hsl(0, 0%, 100%)",
   },
@@ -20,7 +25,7 @@ const CountryCard = (props) => {
   const classes = useStyles(props);
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
-      <Card className={classes.root}>
+      <Card className={classes.card}>
         <CardActionArea>
           <CardMedia
             component="img"
