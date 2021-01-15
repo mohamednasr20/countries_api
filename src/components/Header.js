@@ -1,23 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { toggleDarkMode } from "../actions";
-import { makeStyles } from "@material-ui/core/styles";
 import { Container, Typography, Button } from "@material-ui/core";
 import Brightness3Icon from "@material-ui/icons/Brightness3";
+import useStyles from "../styles/HeaderStyles";
 
-const useStyles = makeStyles({
-  root: {
-    padding: "1rem 0",
-    marginBottom: "2rem",
-    background: (props) =>
-      props.isDarkMode ? "hsl(209, 23%, 22%)" : "hsl(0, 0%, 100%)",
-  },
-  container: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-});
-function Header({ toggleDarkMode, isDarkMode }) {
+const Header = ({ toggleDarkMode, isDarkMode }) => {
   const classes = useStyles({ isDarkMode });
 
   return (
@@ -34,7 +22,7 @@ function Header({ toggleDarkMode, isDarkMode }) {
       </Container>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => {
   return { isDarkMode: state.isDarkMode };

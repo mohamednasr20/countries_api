@@ -5,13 +5,7 @@ import { connect } from "react-redux";
 import { fetchCountries } from "../actions";
 import CountryCard from "./CountryCard";
 import { Container } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    textAlign: "center",
-  },
-}));
+import useStyles from "../styles/CountriesListStyles";
 
 const CountriesList = ({ countries, fetchCountries, isDarkMode }) => {
   const classes = useStyles();

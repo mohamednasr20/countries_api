@@ -1,21 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { makeStyles } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
 import CountriesList from "./CountriesList";
 import Header from "./Header";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    height: "100vh",
-    overflow: "auto",
-  },
-}));
+import useStyles from "../styles/AppStyles";
 
 const App = ({ isDarkMode }) => {
   const classes = useStyles();
-
   const theme = createMuiTheme({
     palette: {
       type: isDarkMode ? "dark" : "light",

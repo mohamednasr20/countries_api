@@ -1,64 +1,13 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { filterCountries, fetchCountries } from "../actions";
-import { fade, makeStyles } from "@material-ui/core/styles";
 import FormControl from "@material-ui/core/FormControl";
 import SearchIcon from "@material-ui/icons/Search";
 import { Container, InputBase } from "@material-ui/core";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    marginBottom: "2rem",
-
-    [theme.breakpoints.up("sm")]: {
-      display: "flex",
-      justifyContent: "space-between",
-    },
-  },
-
-  search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
-  },
-
-  searchIcon: {
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  inputRoot: {
-    color: "inherit",
-  },
-
-  inputInput: {
-    paddingTop: theme.spacing(2),
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-
-    [theme.breakpoints.up("sm")]: {
-      width: "20ch",
-    },
-  },
-
-  formControl: {
-    minWidth: 150,
-    [theme.breakpoints.down("sm")]: {
-      marginTop: "1rem",
-    },
-  },
-}));
+import useStyles from "../styles/SearchBarStyles";
 
 const SearchBar = ({ filterCountries, fetchCountries }) => {
   const classes = useStyles();
