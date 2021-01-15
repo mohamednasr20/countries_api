@@ -5,6 +5,12 @@ export const fetchCountries = () => async (dispatch) => {
   dispatch({ type: "FETCH_COUNTRIES", payload: response.data });
 };
 
+export const filterCountries = (region) => async (dispatch) => {
+  const response = await restCountries.get(`/region/${region}`);
+  dispatch({ type: "FILTER_COUNTRIES", payload: response.data });
+  console.log(response.data);
+};
+
 export const toggleDarkMode = () => (dispatch) => {
-  dispatch({ type: "SELECT_MODE" });
+  dispatch({ type: "TOGGLE_DARKMODE" });
 };

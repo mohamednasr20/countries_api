@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import SearchBar from "./SearchBar";
 import Grid from "@material-ui/core/Grid";
 import { connect } from "react-redux";
 import { fetchCountries } from "../actions";
@@ -14,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CountriesList = ({ countries, fetchCountries, isDarkMode }) => {
   const classes = useStyles();
+
   useEffect(() => {
     fetchCountries();
   }, []);
@@ -37,6 +39,8 @@ const CountriesList = ({ countries, fetchCountries, isDarkMode }) => {
 
   return (
     <Container>
+      <SearchBar />
+
       <Grid
         className={classes.root}
         container
@@ -51,7 +55,11 @@ const CountriesList = ({ countries, fetchCountries, isDarkMode }) => {
 };
 
 const mapStateToProps = (state) => {
-  return { countries: state.countries, isDarkMode: state.isDarkMode };
+  return {
+    countries: state.countries,
+    isDarkMode: state.isDarkMode,
+    selectedRegion: state.selectedRegion,
+  };
 };
 
 export default connect(mapStateToProps, { fetchCountries })(CountriesList);

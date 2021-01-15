@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
+import { filterCountries, fetchCountries } from "../actions";
+import { fade, makeStyles } from "@material-ui/core/styles";
 import FormControl from "@material-ui/core/FormControl";
-import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
 import SearchIcon from "@material-ui/icons/Search";
-import { Container } from "@material-ui/core";
+import { Container, InputBase } from "@material-ui/core";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
@@ -15,24 +15,55 @@ const useStyles = makeStyles((theme) => ({
 
     [theme.breakpoints.up("sm")]: {
       display: "flex",
-      alignItems: "center",
+      justifyContent: "space-between",
+    },
+  },
+
+  search: {
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    "&:hover": {
+      backgroundColor: fade(theme.palette.common.white, 0.25),
+    },
+  },
+
+  searchIcon: {
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  inputRoot: {
+    color: "inherit",
+  },
+
+  inputInput: {
+    paddingTop: theme.spacing(2),
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+
+    [theme.breakpoints.up("sm")]: {
+      width: "20ch",
     },
   },
 
   formControl: {
-    minWidth: 200,
+    minWidth: 150,
+    [theme.breakpoints.down("sm")]: {
+      marginTop: "1rem",
+    },
   },
 }));
 
-const SearchBar = () => {
+const SearchBar = ({ filterCountries, fetchCountries }) => {
   const classes = useStyles();
 
-  const [age, setAge] = useState("");
   const [open, setOpen] = useState(false);
-
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
 
   const handleClose = () => {
     setOpen(false);
@@ -42,20 +73,27 @@ const SearchBar = () => {
     setOpen(true);
   };
 
+  const handleChange = (e) => {
+    const region = e.target.value;
+    region === "All" ? fetchCountries() : filterCountries(region);
+  };
+
   return (
     <Container className={classes.root}>
-      <Grid container spacing={1} alignItems="flex-end">
-        <Grid item>
+      <div className={classes.search}>
+        <div className={classes.searchIcon}>
           <SearchIcon />
-        </Grid>
-        <Grid item>
-          <TextField
-            id="input-with-icon-grid"
-            label="Search for a country..."
-            fullWidth
-          />
-        </Grid>
-      </Grid>
+        </div>
+        <InputBase
+          placeholder="Search for a country…"
+          classes={{
+            root: classes.inputRoot,
+            input: classes.inputInput,
+          }}
+          inputProps={{ "aria-label": "search" }}
+        />
+      </div>
+
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-controlled-open-select-label">
           Filtter By Region
@@ -66,19 +104,21 @@ const SearchBar = () => {
           open={open}
           onClose={handleClose}
           onOpen={handleOpen}
-          value={age}
+          value={""}
           onChange={handleChange}
         >
-          <MenuItem value="">
-            <em>None</em>
+          <MenuItem value={"All"}>
+            <em>All</em>
           </MenuItem>
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          <MenuItem value={"Africa"}>Africa</MenuItem>
+          <MenuItem value={"Americas"}>Americas</MenuItem>
+          <MenuItem value={"Asia"}>Asia</MenuItem>
+          <MenuItem value={"Europe"}>Europe</MenuItem>
+          <MenuItem value={"Oceania"}>Oceania</MenuItem>
         </Select>
       </FormControl>
     </Container>
   );
 };
 
-export default SearchBar;
+export default connect(null, { filterCountries, fetchCountries })(SearchBar);

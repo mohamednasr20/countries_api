@@ -2,10 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper, Container } from "@material-ui/core";
+import { Paper } from "@material-ui/core";
 import CountriesList from "./CountriesList";
 import Header from "./Header";
-import SearchBar from "./SearchBar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,7 +32,6 @@ const App = ({ isDarkMode }) => {
     <ThemeProvider theme={theme}>
       <Paper elevation={0} className={classes.root} square>
         <Header />
-        <SearchBar />
 
         <CountriesList />
       </Paper>

@@ -1,22 +1,21 @@
 import { combineReducers } from "redux";
 
-const countriesReducer = (state = [], action) => {
+const fetchCountries = (state = [], action) => {
   switch (action.type) {
     case "FETCH_COUNTRIES":
       return action.payload;
-
+    case "FILTER_COUNTRIES":
+      return action.payload;
     default:
       return state;
   }
 };
 
-const toggleDarkMode = (state = true, action) => {
-  if (action.type === "SELECT_MODE") {
-    return !state;
-  } else return state;
+const toggleDarkMode = (state = false, action) => {
+  return action.type === "TOGGLE_DARKMODE" ? !state : state;
 };
 
 export default combineReducers({
-  countries: countriesReducer,
+  countries: fetchCountries,
   isDarkMode: toggleDarkMode,
 });
