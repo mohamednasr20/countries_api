@@ -11,6 +11,10 @@ const useStyles = makeStyles({
     background: (props) =>
       props.darkMode ? "hsl(209, 23%, 22%)" : "hsl(0, 0%, 100%)",
   },
+
+  cardContent: {
+    textAlign: "left",
+  },
 });
 
 export default useStyles;

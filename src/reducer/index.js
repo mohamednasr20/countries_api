@@ -11,6 +11,10 @@ const fetchCountries = (state = [], action) => {
   }
 };
 
+const handleSelectCountry = (state = {}, action) => {
+  return action.type === "SELECT_COUNTRY" ? action.payload : state;
+};
+
 const toggleDarkMode = (state = false, action) => {
   return action.type === "TOGGLE_DARKMODE" ? !state : state;
 };
@@ -18,4 +22,5 @@ const toggleDarkMode = (state = false, action) => {
 export default combineReducers({
   countries: fetchCountries,
   isDarkMode: toggleDarkMode,
+  selectedCountry: handleSelectCountry,
 });

@@ -8,6 +8,11 @@ export const fetchCountries = () => async (dispatch) => {
 export const filterCountries = (region) => async (dispatch) => {
   const response = await restCountries.get(`/region/${region}`);
   dispatch({ type: "FILTER_COUNTRIES", payload: response.data });
+};
+
+export const onSelectCountry = (name) => async (dispatch) => {
+  const response = await restCountries.get(`/name/${name}?fullText=true`);
+  dispatch({ type: "SELECT_COUNTRY", payload: response.data[0] });
   console.log(response.data);
 };
 

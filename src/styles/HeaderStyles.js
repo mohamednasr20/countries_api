@@ -6,6 +6,8 @@ const useStyles = makeStyles({
     marginBottom: "2rem",
     background: (props) =>
       props.isDarkMode ? "hsl(209, 23%, 22%)" : "hsl(0, 0%, 100%)",
+    color: (props) =>
+      props.isDarkMode ? "hsl(0, 0%, 100%)" : "hsl(209, 23%, 22%)",
   },
   container: {
     display: "flex",

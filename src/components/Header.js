@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { toggleDarkMode } from "../actions";
-import { Container, Typography, Button } from "@material-ui/core";
+import { Container, Typography, Button, AppBar } from "@material-ui/core";
 import Brightness3Icon from "@material-ui/icons/Brightness3";
 import useStyles from "../styles/HeaderStyles";
 
@@ -9,7 +9,7 @@ const Header = ({ toggleDarkMode, isDarkMode }) => {
   const classes = useStyles({ isDarkMode });
 
   return (
-    <div className={classes.root}>
+    <AppBar position="sticky" className={classes.root}>
       <Container className={classes.container}>
         <Typography variant="subtitle1">Where In The world ?</Typography>
         <Button
@@ -20,7 +20,7 @@ const Header = ({ toggleDarkMode, isDarkMode }) => {
           Dark Mode
         </Button>
       </Container>
-    </div>
+    </AppBar>
   );
 };
 

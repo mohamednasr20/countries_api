@@ -5,6 +5,7 @@ import { Paper } from "@material-ui/core";
 import CountriesList from "./CountriesList";
 import Header from "./Header";
 import useStyles from "../styles/AppStyles";
+import CountryDetails from "./CountryDetails";
 
 const App = ({ isDarkMode }) => {
   const classes = useStyles();
@@ -24,8 +25,8 @@ const App = ({ isDarkMode }) => {
     <ThemeProvider theme={theme}>
       <Paper elevation={0} className={classes.root} square>
         <Header />
-
-        <CountriesList />
+        <CountryDetails />
+        {/* <CountriesList />  */}
       </Paper>
     </ThemeProvider>
   );
