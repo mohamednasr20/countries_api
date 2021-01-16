@@ -26,7 +26,7 @@ const App = ({ isDarkMode }) => {
       <Paper elevation={0} className={classes.root} square>
         <Header />
         <CountryDetails />
-        {/* <CountriesList />  */}
+        <CountriesList />
       </Paper>
     </ThemeProvider>
   );
