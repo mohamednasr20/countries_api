@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import useStyles from "../styles/CountryCardStyles";
 import {
   Card,
@@ -12,8 +13,14 @@ import {
 const CountryCard = (props) => {
   const { flag, name, population, region, capital } = props;
   const classes = useStyles(props);
+  const history = useHistory();
+
+  const handleClick = (name) => {
+    history.push(`/countries/${name}`);
+  };
+
   return (
-    <Grid item xs={12} sm={6} md={4} lg={3}>
+    <Grid onClick={() => handleClick(name)} item xs={12} sm={6} md={4} lg={3}>
       <Card className={classes.card}>
         <CardActionArea>
           <CardMedia

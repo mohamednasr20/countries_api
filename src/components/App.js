@@ -1,5 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
 import CountriesList from "./CountriesList";
@@ -23,11 +25,15 @@ const App = ({ isDarkMode }) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Paper elevation={0} className={classes.root} square>
-        <Header />
-        <CountryDetails />
-        <CountriesList />
-      </Paper>
+      <Router>
+        <Paper elevation={0} className={classes.root} square>
+          <Header />
+          <Switch>
+            <Route path="/" exact component={CountriesList} />
+            <Route path="/countries/:name" exact component={CountryDetails} />
+          </Switch>
+        </Paper>
+      </Router>
     </ThemeProvider>
   );
 };

@@ -1,28 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { onSelectCountry } from "../actions";
+import { Link } from "react-router-dom";
+import { onSelectCountry, fetchCountries } from "../actions";
 import { Container, Grid, Button, Typography } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import useStyles from "../styles/CountryDetailsStyles";
-import CountryInfo from "../components/CountryInfo";
+import CountryInfo from "./CountryInfo";
 import CountryBorders from "./CountryBorders";
 
-const CountryDetails = ({ onSelectCountry, selectedCountry, countries }) => {
+const CountryDetails = ({
+  fetchCountries,
+  onSelectCountry,
+  selectedCountry,
+  countries,
+  match,
+}) => {
   const classes = useStyles();
 
-  const handleClick = () => {
-    onSelectCountry("france");
-  };
+  useEffect(() => {
+    fetchCountries();
+    onSelectCountry(match.params.name);
+  }, []);
 
   return (
     <Container>
-      <Button
-        variant="outlined"
-        onClick={handleClick}
-        startIcon={<ArrowBackIcon />}
-      >
-        Back
-      </Button>
+      <Link className={classes.link} to="/">
+        <Button variant="outlined" startIcon={<ArrowBackIcon />}>
+          Back
+        </Button>
+      </Link>
 
       {selectedCountry.name && (
         <Grid container spacing={3} className={classes.grid}>
@@ -38,7 +44,11 @@ const CountryDetails = ({ onSelectCountry, selectedCountry, countries }) => {
               <Typography variant="h4">{selectedCountry.name}</Typography>
             </Grid>
             <CountryInfo country={selectedCountry} />
-            <CountryBorders country={selectedCountry} countries={countries} />
+            <CountryBorders
+              country={selectedCountry}
+              countries={countries}
+              onSelectCountry={onSelectCountry}
+            />
           </Grid>
         </Grid>
       )}
@@ -50,4 +60,6 @@ const mapStateToProps = (state) => {
   return { selectedCountry: state.selectedCountry, countries: state.countries };
 };
 
-export default connect(mapStateToProps, { onSelectCountry })(CountryDetails);
+export default connect(mapStateToProps, { onSelectCountry, fetchCountries })(
+  CountryDetails
+);

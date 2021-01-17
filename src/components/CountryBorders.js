@@ -1,25 +1,16 @@
 import React from "react";
 import { Grid, Button } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
+import useStyles from "../styles/CountryBordersStyles";
 
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles({
-  bordersContainer: {
-    marginTop: "2rem",
-  },
-  bordersTitle: {
-    marginBottom: "1rem",
-    marginTop: "0.5rem",
-  },
-
-  btn: {
-    marginRight: "0.5rem",
-    marginBottom: "0.5rem",
-  },
-});
-
-const CountryBorders = ({ country, countries }) => {
+const CountryBorders = ({ country, countries, onSelectCountry }) => {
   const classes = useStyles();
+  const history = useHistory();
+
+  const handleCountrySelect = (name) => {
+    history.push(`/countries/${name}`);
+    onSelectCountry(name);
+  };
 
   const borderCountryFullName = (code) => {
     const country = countries.find((country) => country.alpha3Code === code);
@@ -37,6 +28,7 @@ const CountryBorders = ({ country, countries }) => {
             className={classes.btn}
             variant="outlined"
             size="small"
+            onClick={() => handleCountrySelect(borderCountryFullName(border))}
           >
             {borderCountryFullName(border)}
           </Button>
