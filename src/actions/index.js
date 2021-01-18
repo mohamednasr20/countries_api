@@ -13,7 +13,11 @@ export const filterCountries = (region) => async (dispatch) => {
 export const onSelectCountry = (name) => async (dispatch) => {
   const response = await restCountries.get(`/name/${name}?fullText=true`);
   dispatch({ type: "SELECT_COUNTRY", payload: response.data[0] });
-  console.log(response.data);
+};
+
+export const onSearchByName = (search) => async (dispatch) => {
+  const response = await restCountries.get(`/name/${search}`);
+  dispatch({ type: "SEARCH_NAME", payload: response.data });
 };
 
 export const toggleDarkMode = () => (dispatch) => {

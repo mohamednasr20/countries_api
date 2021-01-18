@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import SearchBar from "./SearchBar";
+import CountriesNav from "./CountriesNav";
 import Grid from "@material-ui/core/Grid";
 import { connect } from "react-redux";
 import { fetchCountries } from "../actions";
@@ -33,7 +33,7 @@ const CountriesList = ({ countries, fetchCountries, isDarkMode }) => {
 
   return (
     <Container>
-      <SearchBar />
+      <CountriesNav />
 
       <Grid
         className={classes.root}

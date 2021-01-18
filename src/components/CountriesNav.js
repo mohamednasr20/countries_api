@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { filterCountries, fetchCountries } from "../actions";
 import FormControl from "@material-ui/core/FormControl";
-import SearchIcon from "@material-ui/icons/Search";
-import { Container, InputBase } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import useStyles from "../styles/SearchBarStyles";
+import useStyles from "../styles/CountriesNavStyles";
+import SearchInput from "./SearchInput";
 
-const SearchBar = ({ filterCountries, fetchCountries }) => {
+const CountriesNav = ({ filterCountries, fetchCountries }) => {
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
@@ -29,20 +29,7 @@ const SearchBar = ({ filterCountries, fetchCountries }) => {
 
   return (
     <Container className={classes.root}>
-      <div className={classes.search}>
-        <div className={classes.searchIcon}>
-          <SearchIcon />
-        </div>
-        <InputBase
-          placeholder="Search for a country…"
-          classes={{
-            root: classes.inputRoot,
-            input: classes.inputInput,
-          }}
-          inputProps={{ "aria-label": "search" }}
-        />
-      </div>
-
+      <SearchInput />
       <FormControl className={classes.formControl}>
         <InputLabel id="demo-controlled-open-select-label">
           Filtter By Region
@@ -70,4 +57,4 @@ const SearchBar = ({ filterCountries, fetchCountries }) => {
   );
 };
 
-export default connect(null, { filterCountries, fetchCountries })(SearchBar);
+export default connect(null, { filterCountries, fetchCountries })(CountriesNav);
