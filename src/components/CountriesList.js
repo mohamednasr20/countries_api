@@ -13,6 +13,7 @@ const CountriesList = ({ countries, fetchCountries, isDarkMode }) => {
 
   useEffect(() => {
     fetchCountries();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const countriesList = !countries.length ? (

@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { onSearchByName } from "../actions";
+import { onSearchByName, fetchCountries } from "../actions";
 import SearchIcon from "@material-ui/icons/Search";
 import { InputBase } from "@material-ui/core";
 import useStyles from "../styles/SearchInputStyles";
 
-const SearchInput = ({ onSearchByName }) => {
+const SearchInput = ({ onSearchByName, fetchCountries }) => {
   const classes = useStyles();
 
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (e) => {
+    if (e.target.value === "") {
+      fetchCountries();
+    }
     setSearchTerm(e.target.value);
   };
 
@@ -23,6 +26,7 @@ const SearchInput = ({ onSearchByName }) => {
     return () => {
       clearTimeout(timedOut);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm]);
 
   return (
@@ -46,4 +50,4 @@ const SearchInput = ({ onSearchByName }) => {
   );
 };
 
-export default connect(null, { onSearchByName })(SearchInput);
+export default connect(null, { onSearchByName, fetchCountries })(SearchInput);

@@ -8,6 +8,7 @@ const fetchCountries = (state = [], action) => {
       return action.payload;
     case "SEARCH_NAME":
       return action.payload;
+    //
     default:
       return state;
   }

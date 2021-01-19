@@ -19,7 +19,7 @@ const CountryBorders = ({ country, countries, onSelectCountry }) => {
   return (
     <Grid item xs={12} container className={classes.bordersContainer}>
       <Grid item xs={12} sm={3} className={classes.bordersTitle}>
-        Border Countries:
+        <h4>Border Countries:</h4>
       </Grid>
       <Grid item xs={12} sm={9}>
         {country.borders.map((border) => (

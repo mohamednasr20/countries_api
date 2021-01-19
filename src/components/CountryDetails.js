@@ -4,22 +4,17 @@ import CountryBorders from "./CountryBorders";
 import useStyles from "../styles/CountryDetailsStyles";
 import { connect } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { onSelectCountry, fetchCountries } from "../actions";
+import { onSelectCountry } from "../actions";
 import { Container, Grid, Button, Typography } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
-const CountryDetails = ({
-  fetchCountries,
-  onSelectCountry,
-  selectedCountry,
-  countries,
-}) => {
+const CountryDetails = ({ onSelectCountry, selectedCountry, countries }) => {
   const classes = useStyles();
   const params = useParams();
 
   useEffect(() => {
-    fetchCountries();
     onSelectCountry(params.name);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -61,6 +56,4 @@ const mapStateToProps = (state) => {
   return { selectedCountry: state.selectedCountry, countries: state.countries };
 };
 
-export default connect(mapStateToProps, { onSelectCountry, fetchCountries })(
-  CountryDetails
-);
+export default connect(mapStateToProps, { onSelectCountry })(CountryDetails);
