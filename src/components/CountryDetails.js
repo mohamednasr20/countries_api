@@ -1,25 +1,25 @@
 import React, { useEffect } from "react";
+import CountryInfo from "./CountryInfo";
+import CountryBorders from "./CountryBorders";
+import useStyles from "../styles/CountryDetailsStyles";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { onSelectCountry, fetchCountries } from "../actions";
 import { Container, Grid, Button, Typography } from "@material-ui/core";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import useStyles from "../styles/CountryDetailsStyles";
-import CountryInfo from "./CountryInfo";
-import CountryBorders from "./CountryBorders";
 
 const CountryDetails = ({
   fetchCountries,
   onSelectCountry,
   selectedCountry,
   countries,
-  match,
 }) => {
   const classes = useStyles();
+  const params = useParams();
 
   useEffect(() => {
     fetchCountries();
-    onSelectCountry(match.params.name);
+    onSelectCountry(params.name);
   }, []);
 
   return (
@@ -43,6 +43,7 @@ const CountryDetails = ({
             <Grid item xs={12}>
               <Typography variant="h4">{selectedCountry.name}</Typography>
             </Grid>
+
             <CountryInfo country={selectedCountry} />
             <CountryBorders
               country={selectedCountry}

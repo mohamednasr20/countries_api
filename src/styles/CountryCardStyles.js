@@ -15,6 +15,9 @@ const useStyles = makeStyles({
   cardContent: {
     textAlign: "left",
   },
+  span: {
+    opacity: "0.7",
+  },
 });
 
 export default useStyles;

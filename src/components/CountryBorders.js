@@ -14,7 +14,7 @@ const CountryBorders = ({ country, countries, onSelectCountry }) => {
 
   const borderCountryFullName = (code) => {
     const country = countries.find((country) => country.alpha3Code === code);
-    return country ? country.name : "name";
+    return country ? country.name : "";
   };
   return (
     <Grid item xs={12} container className={classes.bordersContainer}>

@@ -2,15 +2,6 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginBottom: "2rem",
-
-    [theme.breakpoints.up("sm")]: {
-      display: "flex",
-      justifyContent: "space-between",
-    },
-  },
-
-  search: {
     position: "relative",
     borderRadius: theme.shape.borderRadius,
     backgroundColor: fade(theme.palette.common.white, 0.15),
@@ -40,13 +31,6 @@ const useStyles = makeStyles((theme) => ({
 
     [theme.breakpoints.up("sm")]: {
       width: "20ch",
-    },
-  },
-
-  formControl: {
-    minWidth: 150,
-    [theme.breakpoints.down("sm")]: {
-      marginTop: "1rem",
     },
   },
 }));

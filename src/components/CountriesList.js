@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import CountriesNav from "./CountriesNav";
+import CountryCard from "./CountryCard";
+import CountriesForm from "./CountriesForm";
+import useStyles from "../styles/CountriesListStyles";
 import Grid from "@material-ui/core/Grid";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { connect } from "react-redux";
 import { fetchCountries } from "../actions";
-import CountryCard from "./CountryCard";
 import { Container } from "@material-ui/core";
-import useStyles from "../styles/CountriesListStyles";
 
 const CountriesList = ({ countries, fetchCountries, isDarkMode }) => {
   const classes = useStyles();
@@ -14,26 +15,28 @@ const CountriesList = ({ countries, fetchCountries, isDarkMode }) => {
     fetchCountries();
   }, []);
 
-  const countriesList = !countries.length
-    ? "loading"
-    : countries.map((country) => {
-        return (
-          <CountryCard
-            key={country.name}
-            name={country.name}
-            flag={country.flag}
-            title={country.name}
-            population={country.population}
-            region={country.region}
-            capital={country.capital}
-            darkMode={isDarkMode}
-          />
-        );
-      });
+  const countriesList = !countries.length ? (
+    <CircularProgress color="inherit" />
+  ) : (
+    countries.map((country) => {
+      return (
+        <CountryCard
+          key={country.name}
+          name={country.name}
+          flag={country.flag}
+          title={country.name}
+          population={country.population}
+          region={country.region}
+          capital={country.capital}
+          darkMode={isDarkMode}
+        />
+      );
+    })
+  );
 
   return (
     <Container>
-      <CountriesNav />
+      <CountriesForm />
 
       <Grid
         className={classes.root}

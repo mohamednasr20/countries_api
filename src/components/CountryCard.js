@@ -13,6 +13,7 @@ import {
 const CountryCard = (props) => {
   const { flag, name, population, region, capital } = props;
   const classes = useStyles(props);
+
   const history = useHistory();
 
   const handleClick = (name) => {
@@ -35,13 +36,13 @@ const CountryCard = (props) => {
               {name}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              Population: {population}
+              Population: <span className={classes.span}>{population}</span>
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              Region: {region}
+              Region: <span className={classes.span}>{region}</span>
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              Capital: {capital}
+              Capital: <span className={classes.span}>{capital}</span>
             </Typography>
           </CardContent>
         </CardActionArea>

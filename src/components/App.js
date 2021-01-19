@@ -1,21 +1,23 @@
 import React from "react";
+import Header from "./Header";
+import CountriesList from "./CountriesList";
+import CountryDetails from "./CountryDetails";
+import useStyles from "../styles/AppStyles";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
-import CountriesList from "./CountriesList";
-import Header from "./Header";
-import useStyles from "../styles/AppStyles";
-import CountryDetails from "./CountryDetails";
 
 const App = ({ isDarkMode }) => {
   const classes = useStyles();
+
   const theme = createMuiTheme({
     palette: {
       type: isDarkMode ? "dark" : "light",
       primary: {
-        main: isDarkMode ? "hsl(0, 0%, 100%)" : "hsl(200, 15%, 8%)",
+        main: "hsl(0, 0%, 100%)",
+        dark: "hsl(0, 0%, 100%)",
+        light: "hsl(200, 15%, 8%)",
       },
       background: {
         paper: isDarkMode ? "hsl(207, 26%, 17%)" : " hsl(0, 0%, 98%)",
@@ -29,8 +31,12 @@ const App = ({ isDarkMode }) => {
         <Paper elevation={0} className={classes.root} square>
           <Header />
           <Switch>
-            <Route path="/" exact component={CountriesList} />
-            <Route path="/countries/:name" exact component={CountryDetails} />
+            <Route path="/" exact>
+              <CountriesList />
+            </Route>
+            <Route path="/countries/:name" exact>
+              <CountryDetails />
+            </Route>
           </Switch>
         </Paper>
       </Router>
